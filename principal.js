@@ -1,7 +1,7 @@
 
 function getGroups() {
       const defaultGroups = [
-        { name: "Produto: 212 Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Fogão 70x70 cm<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros"/*"218593 - Linhão Rotativo 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros"*/, items: [
+        { name: "Produto: 218593 - Tecido Linhão Rotativo 1,50 m<br>Formato: Rotativo<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
         { name: "M1008 V01", image: src="Midias/Linhão_Rotativo/M1008 V01.jpg", quantity: 1 },
         { name: "M3000-2 V20 AMARELO", image: "Midias/Linhão_Rotativo/M3000-2 V20 AMARELO.jpg", quantity: 1 },
         { name: "M3000-2 V20 AZUL", image: "Midias/Linhão_Rotativo/M3000-2 V20 AZUL.jpg", quantity: 1 },
@@ -29,7 +29,7 @@ function getGroups() {
         { name: "M6145 V01", image: "Midias/Linhão_Rotativo/M6145 V01.jpeg", quantity: 1 },
         { name: "M6157 V04", image: "Midias/Linhão_Rotativo/M6157 V04.jpeg", quantity: 1 },
         ]},
-           { name:"Produto: 215892 Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Fogão 70x70 cm<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
+           { name:"Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Fogão 70x70 cm<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
         { name: "M5061 V01", image: src="Midias/Linhão_Quadro/Fogão/M5061 V01.jpg", quantity: 1 },
         { name: "M5066 V03", image: "Midias/Linhão_Quadro/Fogão/M5066 V03.jpg", quantity: 1 },
         { name: "M5099 V01", image: "Midias/Linhão_Quadro/Fogão/M5099 V01.jpg", quantity: 1 },
@@ -44,7 +44,7 @@ function getGroups() {
         
 
     ]},
-    { name: "215892 - Linhão Quadro - Jogos Americanos 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
+    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Jogos Americanos<br>1 Caminho 140X40 cm / 1 Toalha de chá 65x85 cm / 4 Toalha Bandeja 30x40 cm<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
     { name: "M1032 V01", image: src="Midias/Linhão_Quadro/Jogos americanos/M1032 V01.jpg", quantity: 1 },
     { name: "M2057 V01", image: src="Midias/Linhão_Quadro/Jogos americanos/M2057 V01.jpg", quantity: 1 },
     { name: "M2062 V01", image: src="Midias/Linhão_Quadro/Jogos americanos/M2062 V01.jpg", quantity: 1 },
@@ -56,7 +56,7 @@ function getGroups() {
 
     ]},
 
-    { name: "215892 - Linhão Quadro - Chá / Caminho 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
+    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Caminho 140X40 cm / Toalha de chá 65x85 cm <br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
 { name: "M1082 V01", image: src="Midias/Linhão_Quadro/Chá e caminhos/M1082 V01.jpg", quantity: 1 },
 { name: "M4111 V01", image: src="Midias/Linhão_Quadro/Chá e caminhos/M4111 V01.jpg", quantity: 1 },        
 { name: "M4111 V02", image: src="Midias/Linhão_Quadro/Chá e caminhos/M4111 V02.jpg", quantity: 1 },
