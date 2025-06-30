@@ -136,7 +136,9 @@ function getGroups() {
     { name: "215893 - P.A. Quadro - Fogão 1,50 m Larg. <br>Composição 60% Alg. / 40% Pes. - Peças com 30 metros", items: [
     { name: "M3038 V15", image: src="Midias/PA_Quadro/Fogão/M5038 V15.jpg", quantity: 1 },
     { name: "M5282 V02", image: src="Midias/PA_Quadro/Fogão/M5282 V02.jpg", quantity: 1 },
-    { name: "M5287 V07", image: src="Midias/PA_Quadro/Fogão/M5287 V07.jpg", quantity: 1 },      
+    { name: "M5287 V07", image: src="Midias/PA_Quadro/Fogão/M5287 V07.jpg", quantity: 1 },
+    { name: "M5343 V04", image: src="Midias/PA_Quadro/Fogão/M5343 V04.jpg", quantity: 1 },
+    { name: "M5344 V03", image: src="Midias/PA_Quadro/Fogão/M5344 V03.jpg", quantity: 1 },           
 
     ]},
 
