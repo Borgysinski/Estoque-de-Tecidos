@@ -48,8 +48,9 @@ function getGroups() {
     { name: "M1032 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M1032 V01.jpg", quantity: 1 },
     { name: "M2057 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M2057 V01.jpg", quantity: 1 },
     { name: "M2062 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M2062 V01.jpg", quantity: 1 },
+    { name: "M4112 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M4112 V01.jpg", quantity: 1 },
     { name: "M5075 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M5075 V01.jpg", quantity: 1 },
-    { name: "M5089 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M5075 V01.jpg", quantity: 1 },  
+    { name: "M5089 V20", image: src="Midias/Linhão_Quadro/Jogos americanos/M5089 V20.jpg", quantity: 1 },  
     { name: "M5332 V06", image: src="Midias/Linhão_Quadro/Jogos Americanos/M5332 V06.jpg", quantity: 1 },   
 
 
