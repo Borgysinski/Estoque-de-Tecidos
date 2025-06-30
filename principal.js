@@ -3,7 +3,7 @@ function getGroups() {
       const defaultGroups = [
         { name: "218593 - Linhão Rotativo 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
         { name: "M1008 V01", image: src="Midias/Linhão_Rotativo/M1008 V01.jpg", quantity: 1 },
-        { name: "M3000-2 V20 AMARELOUU", image: "Midias/Linhão_Rotativo/M3000-2 V20 AMARELO.jpg", quantity: 1 },
+        { name: "M3000-2 V20 AMARELO", image: "Midias/Linhão_Rotativo/M3000-2 V20 AMARELO.jpg", quantity: 1 },
         { name: "M3000-2 V20 AZUL", image: "Midias/Linhão_Rotativo/M3000-2 V20 AZUL.jpg", quantity: 1 },
         { name: "M3000-2 V20 BRANCO", image: "Midias/Linhão_Rotativo/M3000-2 V20 BRANCO.jpg", quantity: 1 },
         { name: "M3000-2 V20 CINZA", image: "Midias/Linhão_Rotativo/M3000-2 V20 CINZA.jpeg", quantity: 1 },
