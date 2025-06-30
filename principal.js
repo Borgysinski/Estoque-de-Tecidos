@@ -46,7 +46,7 @@ function getGroups() {
     ]},
     { name: "215892 - Linhão Quadro - Jogos Americanos 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
     { name: "M1032 V01", image: src="Midias/Linhão_Quadro/Jogos americanos/M1032 V01.jpg", quantity: 1 },
-    { name: "M2057 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M2057 V01.jpg", quantity: 1 },
+    { name: "M2057 V01", image: src="Midias/Linhão_Quadro/Jogos americanos/M2057 V01.jpg", quantity: 1 },
     { name: "M2062 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M2062 V01.jpg", quantity: 1 },
     { name: "M4112 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M4112 V01.jpg", quantity: 1 },
     { name: "M5075 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M5075 V01.jpg", quantity: 1 },
