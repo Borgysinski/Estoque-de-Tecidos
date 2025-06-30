@@ -49,7 +49,7 @@ function getGroups() {
     { name: "M2057 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M2057 V01.jpg", quantity: 1 },
     { name: "M2062 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M2062 V01.jpg", quantity: 1 },
     { name: "M5075 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M5075 V01.jpg", quantity: 1 },
-     
+    { name: "M5075 V01", image: src="Midias/Linhão_Quadro/Jogos Americanos/M5075 V01.jpg", quantity: 1 },  
     { name: "M5332 V06", image: src="Midias/Linhão_Quadro/Jogos Americanos/M5332 V06.jpg", quantity: 1 },   
 
 
