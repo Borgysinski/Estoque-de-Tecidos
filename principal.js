@@ -39,6 +39,8 @@ function getGroups() {
         { name: "M5287 V03", image: "Midias/Linhão_Quadro/Fogão/M5287 V03.jpg", quantity: 1 },
         { name: "M5287 V13", image: "Midias/Linhão_Quadro/Fogão/M5287 V13.jpg", quantity: 1 },
         { name: "M5287 V17", image: "Midias/Linhão_Quadro/Fogão/M5287 V17.jpg", quantity: 1 },
+        { name: "M5343 V01", image: "Midias/Linhão_Quadro/Fogão/M5343 V01.jpg", quantity: 1 },
+        { name: "M5343 V02", image: "Midias/Linhão_Quadro/Fogão/M5343 V02.jpg", quantity: 1 },
         
 
     ]},
