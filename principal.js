@@ -29,7 +29,7 @@ function getGroups() {
         { name: "M6145 V01", image: "Midias/Linhão_Rotativo/M6145 V01.jpeg", quantity: 1 },
         { name: "M6157 V04", image: "Midias/Linhão_Rotativo/M6157 V04.jpeg", quantity: 1 },
         ]},
-           { name:"Produto: 215892 Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Fogão 70x70 cm<br>Composição: 71% Alg. / 29% Pes.
+           { name:"Produto: 215892 Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Fogão 70x70 cm<br>Composição: 71% Alg. / 29% Pes.<
 Peças com 30 metros" /*"215892 - Linhão Quadro - Fogão 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros"*/, items: [
         { name: "M5061 V01", image: src="Midias/Linhão_Quadro/Fogão/M5061 V01.jpg", quantity: 1 },
         { name: "M5066 V03", image: "Midias/Linhão_Quadro/Fogão/M5066 V03.jpg", quantity: 1 },
