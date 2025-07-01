@@ -70,19 +70,19 @@ function getGroups() {
 
 ]},
 
-    { name: "215892 - Linhão Quadro - Chá 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
+    /*{ name: "215892 - Linhão Quadro - Chá 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
 
         
 
-    ]},
+    ]},*/
 
-    { name: "215892 - Linhão Quadro - Caminho 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
+    /*{ name: "215892 - Linhão Quadro - Caminho 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
 
         
 
-    ]},
+    ]},*/
 
-    { name: "215892 - Linhão Quadro - Toalhas Redondas 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
+    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Redonda 140 m<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
     { name: "M2054 V01", image: src="Midias/Linhão_Quadro/Redondas/M2054 V01.png", quantity: 1 },
     { name: "M2059 V01", image: src="Midias/Linhão_Quadro/Redondas/M2059 V01.png", quantity: 1 },
     { name: "M5084 V20", image: src="Midias/Linhão_Quadro/Redondas/M5084 V20.png", quantity: 1 },  
@@ -95,13 +95,13 @@ function getGroups() {
 
     ]},
 
-    { name: "215892 - Linhão Quadro - Toalhas Quadradas 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
+    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Quadrada 140x140 m<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
     { name: "M5029 V15", image: src="Midias/Linhão_Quadro/Quadradas/M5029 V15.jpg", quantity: 1 }, 
     { name: "M5063 V20", image: src="Midias/Linhão_Quadro/Quadradas/M5063 V20.jpg", quantity: 1 },     
 
     ]},
 
-    { name: "215892 - Linhão Quadro - Toalhas Retangulares 1,50 m Larg. <br>Composição 71% Alg. / 29% Pes. - Peças com 30 metros", items: [
+    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Retangular 140x210 m<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
     { name: "M5028 V18", image: src="Midias/Linhão_Quadro/Retangulares/M5028 V18.jpg", quantity: 1 },
     { name: "M5031 V15", image: src="Midias/Linhão_Quadro/Retangulares/M5031 V15.jpg", quantity: 1 },
     { name: "M5077 V06", image: src="Midias/Linhão_Quadro/Retangulares/M5077 V06.jpg", quantity: 1 },
@@ -110,7 +110,7 @@ function getGroups() {
 
     ]},
 
-    { name: "215893 - P.A. Rotativo - 1,50 m Larg. <br>Composição 70% Pes. / 30% Alg. - Peças com 30 metros", items: [
+    { name: "Produto: 215893 - Tecido P.A. Rotativo 1,50 m<br>Formato: Rotativo<br>Composição: 40% Alg. / 60% Pes.<br>Peças com 30 metros", items: [
     { name: "M3052 V01", image: src="Midias/PA_Rotativo/M3052 V01.jpg", quantity: 1 },
     { name: "M4080 V14", image: src="Midias/PA_Rotativo/M4080 V14.jpg", quantity: 1 },
     { name: "M4082 V06", image: src="Midias/PA_Rotativo/M4082 V06.jpg", quantity: 1 },
