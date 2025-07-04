@@ -262,6 +262,7 @@ function salvarComoPDF() {
 function getGroups() {
       const defaultGroups = [
         { name: "Código: 218593 <br>Produto: Tecido Linhão Rotativo 1,50 m <br>Formato: Contínuo <br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
+        { name: "Código: 218593 <br>ProdutoS: Tecido Linhão Rotativo 1,50 m <br>Formato: Contínuo <br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
         { name: "M1008 V01", image: src="Midias/Linhão_Rotativo/M1008 V01.jpg", quantity: 1 },
         { name: "M3000-2 V20 AMARELO", image: "Midias/Linhão_Rotativo/M3000-2 V20 AMARELO.jpg", quantity: 1 },
         { name: "M3000-2 V20 AZUL", image: "Midias/Linhão_Rotativo/M3000-2 V20 AZUL.jpg", quantity: 1 },
