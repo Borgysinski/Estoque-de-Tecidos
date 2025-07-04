@@ -50,7 +50,7 @@ function getGroups() {
     { name: "M2062 V01", image: src="Midias/Linhão_Quadro/Jogos americanos/M2062 V01.jpg", quantity: 1 },
     { name: "M4112 V01", image: src="Midias/Linhão_Quadro/Jogos americanos/M4112 V01.jpg", quantity: 1 },
     { name: "M5075 V01", image: src="Midias/Linhão_Quadro/Jogos americanos/M5075 V01.jpg", quantity: 1 },
-    { name: "M5089 V20", image: src="Midias/Linhão_Quadro/Jogos americanos/M5089 V20.jpg", quantity: 1 },  
+    { name: "teste", image: src="Midias/Linhão_Quadro/Jogos americanos/M5075 V01.jpg", quantity: 1 },
     { name: "M5332 V06", image: src="Midias/Linhão_Quadro/Jogos americanos/M5332 V06.jpg", quantity: 1 },   
 
 
@@ -82,7 +82,7 @@ function getGroups() {
 
     ]},*/
 
-    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Redonda 140 m<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
+    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Redonda 1,40 m<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
     { name: "M2054 V01", image: src="Midias/Linhão_Quadro/Redondas/M2054 V01.png", quantity: 1 },
     { name: "M2059 V01", image: src="Midias/Linhão_Quadro/Redondas/M2059 V01.png", quantity: 1 },
     { name: "M5084 V20", image: src="Midias/Linhão_Quadro/Redondas/M5084 V20.png", quantity: 1 },  
@@ -95,13 +95,13 @@ function getGroups() {
 
     ]},
 
-    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Quadrada 140x140 m<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
+    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Quadrada 1,40x1,40 m<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
     { name: "M5029 V15", image: src="Midias/Linhão_Quadro/Quadradas/M5029 V15.jpg", quantity: 1 }, 
     { name: "M5063 V20", image: src="Midias/Linhão_Quadro/Quadradas/M5063 V20.jpg", quantity: 1 },     
 
     ]},
 
-    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Retangular 140x210 m<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
+    { name: "Produto: 215892 - Tecido Linhão Quadro 1,50 m<br>Formato: Toalha Retangular 1,40x2,10 m<br>Composição: 71% Alg. / 29% Pes.<br>Peças com 30 metros", items: [
     { name: "M5028 V18", image: src="Midias/Linhão_Quadro/Retangulares/M5028 V18.jpg", quantity: 1 },
     { name: "M5031 V15", image: src="Midias/Linhão_Quadro/Retangulares/M5031 V15.jpg", quantity: 1 },
     { name: "M5077 V06", image: src="Midias/Linhão_Quadro/Retangulares/M5077 V06.jpg", quantity: 1 },
@@ -133,7 +133,7 @@ function getGroups() {
         
     ]},
 
-    { name: "215893 - P.A. Quadro - Fogão 1,50 m Larg. <br>Composição 60% Alg. / 40% Pes. - Peças com 30 metros", items: [
+    { name: "Produto: 215893 - Tecido P.A. Quadro 1,50 m<br>Formato: Toalha Fogão 70x70 cm<br>Composição: 60% Alg. / 40% Pes.<br>Peças com 30 metros", items: [
     { name: "M3038 V15", image: src="Midias/PA_Quadro/Fogão/M5038 V15.jpg", quantity: 1 },
     { name: "M5282 V02", image: src="Midias/PA_Quadro/Fogão/M5282 V02.jpg", quantity: 1 },
     { name: "M5287 V07", image: src="Midias/PA_Quadro/Fogão/M5287 V07.jpg", quantity: 1 },
@@ -142,32 +142,26 @@ function getGroups() {
 
     ]},
 
-     { name: "215893 - P.A. Quadro - Jogos Americanos 1,50 m Larg. <br>Composição 60% Alg. / 40% Pes. - Peças com 30 metros", items: [
+     { name: "Produto: 215893 - Tecido P.A. Quadro 1,50 m<br>Formato: Jogos Americanos<br>1 Caminho 140X40 cm / 1 Toalha de chá 65x90 cm / 4 Toalha Bandeja 30x40 cm<br>Composição: 60% Alg. / 40% Pes.<br>Peças com 30 metros", items: [
      { name: "M5050 V15", image: src="Midias/PA_Quadro/Jogos Americanos/M5050 V15.jpg", quantity: 1 },      
 
         
 
     ]},
 
-     { name: "215893 - P.A. Quadro - Chá / Caminho 1,50 m Larg. <br>Composição 60% Alg. / 40% Pes. - Peças com 30 metros", items: [
+     /*{ name: "Produto: 215893 - Tecido P.A. Quadro 1,50 m<br>Formato: Toalha de Chá 65x90 cm<br>Composição: 60% Alg. / 40% Pes.<br>Peças com 30 metros", items: [
 
         
 
-    ]},
+    ]},*/
 
-         { name: "215893 - P.A. Quadro - Chá 1,50 m Larg. <br>Composição 60% Alg. / 40% Pes. - Peças com 30 metros", items: [
-
-        
-
-    ]},
-
-         { name: "215893 - P.A. Quadro - Caminho 1,50 m Larg. <br>Composição 60% Alg. / 40% Pes. - Peças com 30 metros", items: [
+             /*{ name: "Produto: 215893 - Tecido P.A. Quadro 1,50 m<br>Formato: Caminho de mesa 140x40 cm<br>Composição: 60% Alg. / 40% Pes.<br>Peças com 30 metros", items: [
 
         
 
-    ]},
+    ]},*/
 
-         { name: "215893 - P.A. Quadro - Toalhas Redondas 1,50 m Larg. <br>Composição 60% Alg. / 40% Pes. - Peças com 30 metros", items: [
+         { name: "Produto: 215893 - Tecido P.A. Quadro 1,50 m<br>Formato: Toalha Redonda 1,40 m<br>Composição: 60% Alg. / 40% Pes.<br>Peças com 30 metros", items: [
          { name: "M5098 V01", image: src="Midias/PA_Quadro/Redondas/M5098 V01.png", quantity: 1 },
          { name: "M5314 V01", image: src="Midias/PA_Quadro/Redondas/M5314 V01.png", quantity: 1 },      
 
@@ -175,7 +169,7 @@ function getGroups() {
 
     ]},
 
-         { name: "215893 - P.A. Quadro - Toalhas Quadradas 1,50 m Larg. <br>Composição 60% Alg. / 40% Pes. - Peças com 30 metros", items: [
+         { name: "Produto: 215893 - Tecido P.A. Quadro 1,50 m<br>Formato: Toalha Quadrada 1,40x1,40 m<br>Composição: 60% Alg. / 40% Pes.<br>Peças com 30 metros", items: [
          { name: "M4055 V09", image: src="Midias/PA_Quadro/Quadradas/M4055 V09.jpg", quantity: 1 },
          { name: "M5029 V31", image: src="Midias/PA_Quadro/Quadradas/M5029 V31.jpg", quantity: 1 },
          { name: "M5030 V15", image: src="Midias/PA_Quadro/Quadradas/M5030 V15.jpg", quantity: 1 },
@@ -189,12 +183,12 @@ function getGroups() {
 
     ]},
 
-         { name: "215893 - P.A. Quadro - Toalhas Retangulares 1,50 m Larg. <br>Composição 60% Alg. / 40% Pes. - Peças com 30 metros", items: [
+         /*{ name: "Produto: 215893 - Tecido P.A. Quadro 1,50 m<br>Formato: Toalha Retangular 1,40x2,10 m<br>Composição: 60% Alg. / 40% Pes.<br>Peças com 30 metros", items: [
 
         
 
-    ]},
-       { name: "217166 -Tecido Premium 2,50 m Larg. <br>Composição 80% Alg. / 20% Pes. - Peças com 50 metros", items: [
+    ]},*/
+       { name: "Produto: 217166 -Tecido Premium 2,50 m Larg.<br>Formato: Rotativo <br>Composição 80% Alg. / 20% Pes. <br>Peças com 50 metros", items: [
        { name: "M1142 V19", image: src="Midias/Premium/M1142 V19.jpeg", quantity: 1 },
        { name: "M1100 V01", image: src="Midias/Premium/M1100 V01.jpeg", quantity: 1 },
        { name: "M1100 V03", image: src="Midias/Premium/M1100 V03.jpeg", quantity: 1 },
@@ -224,12 +218,12 @@ function renderInventory() {
     itemsDiv.className = (group.name.includes("Linhão Rotativo") ||
                           group.name.includes("Fogão") ||         
                           group.name.includes("Jogos Americanos") || 
-                          group.name.includes("Chá / Caminho") || 
-                          group.name.includes("Toalhas Redondas") || 
-                          group.name.includes("Toalhas Quadradas") ||
+                          group.name.includes("Caminho 140X40 cm / Toalha de chá 65x85 cm ") || 
+                          group.name.includes("Toalha Redonda 1,40 m") || 
+                          group.name.includes("Toalha Quadrada 1,40x1,40 m<") ||
                           group.name.includes("P.A. Rotativo") ||
                           group.name.includes("Tecido Premium") ||  
-                          group.name.includes("Toalhas Retangulares")) 
+                          group.name.includes("Toalha Retangular")) 
                           ? "items special-layout" : "items";
 
     group.items.forEach(item => {
