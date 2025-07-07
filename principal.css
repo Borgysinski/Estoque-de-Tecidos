@@ -142,3 +142,147 @@ background-image: linear-gradient(315deg, #4dccc6 0%, #96b1e4 74%);
       text-decoration: none;
       color: #007BFF;
     }
+    :root {
+      --header-height: 120px;
+      --gap: 100px;
+      --total-space: calc(var(--header-height) + var(--gap)); /* 220px */
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #6a97ac;
+    }
+    .superior {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 0 20px;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 0 auto;
+      margin-top: 40px;
+      width: 1200px;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    #logo_BAT img {   
+      width: 200px;
+      height: auto;
+      margin-right: 10px;
+    }
+    .group {
+      border: 2px solid #000;
+      padding: 10px;
+    }
+    .group h2 {
+      text-align: center;
+      color: rgb(71, 82, 88);
+      font-size: 23px;
+    }
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .item {
+      text-align: center;
+      margin: 10px;
+   
+    }
+    .item img {
+      width: 100px;
+      height: 100px;
+      max-width: 300px;
+      width: auto;
+    }
+    .btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+/* 1 */
+.btn {
+  background-color: #89d8d3;
+background-image: linear-gradient(315deg, #89d8d3 0%, #036fc8 74%);
+  border: none;
+  z-index: 1;
+}
+.btn:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 5px;
+   background-color: #4dccc6;
+background-image: linear-gradient(315deg, #4dccc6 0%, #96b1e4 74%);
+  box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  color: #fff;
+}
+.btn:hover:after {
+  top: 0;
+  height: 100%;
+}
+.btn:active {
+  top: 2px;
+}
+
+.special-layout .item {
+    flex: 1 1 calc(32% - 20px);
+    max-width: calc(32% - 20px);
+    }
+
+.special-layout .item img {
+    width: 100%;
+    max-width: 350px; /* Tamanho maior */
+    height: auto;
+}
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    a {
+      text-align: center;
+      display: block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007BFF;
+    }

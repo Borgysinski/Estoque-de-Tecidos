@@ -63,3 +63,68 @@
       margin: 10px auto;
       display: block;
     }
+    :root {
+      --header-height: 120px;
+      --gap: 100px;
+      --total-space: calc(var(--header-height) + var(--gap));
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #6a97ac;
+    }
+    .superior {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 0 20px;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 0 auto;
+      margin-top: var(--total-space);
+      width: 800px;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .group {
+      border: 2px solid #000;
+      padding: 10px;
+    }
+    .group h2 {
+      text-align: center;
+      color: rgb(71, 82, 88);
+      font-size: 23px;
+    }
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .item {
+      text-align: left;
+      margin: 10px;
+    }
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+    h1 {
+      text-align: center;
+    }
+    button, a {
+      margin: 10px auto;
+      display: block;
+    }
