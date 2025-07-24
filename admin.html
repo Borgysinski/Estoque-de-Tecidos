@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Gerenciar Itens</title>
   <link rel="stylesheet" href="adm.css">
+
+  <!-- Firebase SDKs compatíveis -->
+  <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-auth-compat.js"></script>
+
+  <!-- Inicializa Firebase -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBkKWhnVnBD_y3tVMwwB_E2KqtAjAd-SGw",
+      authDomain: "estoque-de-tecidos-bat-cc79e.firebaseapp.com",
+      projectId: "estoque-de-tecidos-bat-cc79e",
+      storageBucket: "estoque-de-tecidos-bat-cc79e.firebasestorage.app",
+      messagingSenderId: "104430328238",
+      appId: "1:104430328238:web:0f521c521d8beb2a8d503f",
+      measurementId: "G-WVHYPE5JHR"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- Verificação de autenticação -->
+  <script>
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.href = "login.html"; // redireciona se não estiver logado
+      }
+    });
+  </script>
 </head>
 <body>
   <div class="superior">
@@ -15,8 +42,19 @@
     <div id="adminInventory"></div>
     <button id="saveBtn">Salvar Alterações</button>
     <a href="index.html">Voltar para a Página Principal</a>
+    <button id="logoutBtn">Sair</button>
   </div>
 
   <script src="admin.js"></script>
+
+  <!-- Botão de logout -->
+  <script>
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", () => {
+      firebase.auth().signOut().then(() => {
+        window.location.href = "login.html";
+      });
+    });
+  </script>
 </body>
 </html>

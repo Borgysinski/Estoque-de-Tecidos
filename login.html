@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Estoque</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="container">
+    <img src="logo.png" alt="Logo Estoque" class="logo">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="E-mail" required />
+      <input type="password" id="password" placeholder="Senha" required />
+      <button type="submit">Entrar</button>
+      <p id="error" class="error"></p>
+    </form>
+  </div>
+</body>
+
+  <!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-auth-compat.js"></script>
+  <script>
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyBkKWhnVnBD_y3tVMwwB_E2KqtAjAd-SGw",
+  authDomain: "estoque-de-tecidos-bat-cc79e.firebaseapp.com",
+  projectId: "estoque-de-tecidos-bat-cc79e",
+  storageBucket: "estoque-de-tecidos-bat-cc79e.firebasestorage.app",
+  messagingSenderId: "104430328238",
+  appId: "1:104430328238:web:0f521c521d8beb2a8d503f",
+  measurementId: "G-WVHYPE5JHR"
+};
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const errorEl = document.getElementById('error');
+
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(() => {
+          window.location.href = 'admin.html'; // sua página protegida
+        })
+        .catch((error) => {
+          errorEl.textContent = "Login inválido";
+          console.error(error);
+        });
+    });
+  </script>
+</body>
+</html>

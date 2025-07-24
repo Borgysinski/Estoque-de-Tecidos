@@ -21,9 +21,17 @@
     <a href="admin.html">Ir para Admin</a>git 
 
     <!-- Botão para salvar em PDF -->
+     
     <button class="btn" onclick="salvarComoPDF()">Salvar como PDF</button>
   </div>
 
-  <script src="principal.js"></script>
+  <script src="principal.js">
+   
+firebase.auth().onAuthStateChanged((user) => {
+  if (!user) {
+    window.location.href = "login.html";
+  }
+});
+  </script>
 </body>
 </html>
