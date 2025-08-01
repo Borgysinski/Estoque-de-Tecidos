@@ -247,15 +247,136 @@ function renderInventory() {
 document.addEventListener("DOMContentLoaded", () => {
   renderInventory();
 });
+function salvarGruposComoPDF() {
+  const grupos = document.querySelectorAll(".group");
+  const { jsPDF } = window.jspdf;
+  const corOriginal = document.body.style.backgroundColor; // ✅ restaurado
+  document.body.style.backgroundColor = "#ffffff";
 
-function salvarComoPDF() {
-  html2canvas(document.body, { scale: 2 }).then(canvas => {
-    const imgData = canvas.toDataURL("image/jpeg", 0.7);
-    const imgWidth = 210;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  const larguraA4 = 210;
+  const alturaA4 = 297;
+  const alturaRodape = 30;
+  const margemTopo = 15;
 
-    const pdf = new window.jspdf.jsPDF("p", "mm", [imgWidth, imgHeight]);
-    pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight);
-    pdf.save("estoque_de_tecidos.pdf");
-  }).catch(error => console.error("Erro ao capturar página:", error));
+  const logo = new Image();
+  logo.src = "Midias/logo.png";
+
+  logo.onload = () => {
+    console.log("Logo carregada, iniciando geração do PDF! ✅");
+
+    const pdf = new jsPDF("p", "mm", [larguraA4, alturaA4]);
+    const dataAtual = new Date().toLocaleDateString("pt-BR");
+    const logoWidth = 50;
+    const logoHeight = 18;
+    const logoX = (larguraA4 - logoWidth) / 2;
+
+    // 🧢 Capa
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(22);
+    pdf.setTextColor(40);
+    pdf.text("Catálogo de Estoque por Grupo", larguraA4 / 2, 80, { align: "center" });
+
+    pdf.setFontSize(14);
+    pdf.setTextColor(80);
+    pdf.text("Beneficiadora Americana de Tecidos Ltda", larguraA4 / 2, 95, { align: "center" });
+
+    pdf.setFontSize(12);
+    pdf.setTextColor(100);
+    pdf.text(`Atualizado em ${dataAtual}`, larguraA4 / 2, 110, { align: "center" });
+
+    pdf.addImage(logo, "PNG", logoX, 125, logoWidth, logoHeight, undefined, "FAST");
+
+    // 📑 Índice
+    pdf.addPage("p", "mm", [larguraA4, alturaA4]);
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(18);
+    pdf.setTextColor(30);
+    pdf.text("Índice", 20, 30);
+
+    const indexList = [
+      "Tecido Linhão Rotativo 1,50 m – Rotativo",
+      "Toalha Fogão 70 × 70 cm",
+      "Jogos Americanos",
+      "Toalha Redonda 1,40 m",
+      "Toalha Quadrada 1,40 × 1,40 m",
+      "Toalha Retangular 1,40 × 2,10 m",
+      "P.A. Rotativo 1,50 m",
+      "P.A. Fogão 70 × 70 cm",
+      "P.A. Jogos Americanos",
+      "P.A. Redonda 1,40 m",
+      "P.A. Quadrada",
+      "Tecido Premium 2,50 m"
+    ];
+
+    const indiceOffsetY = 40;
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(13);
+    pdf.setTextColor(60);
+
+    indexList.forEach((titulo, i) => {
+      const y = indiceOffsetY + i * 10;
+      pdf.textWithLink(`• ${titulo}`, 25, y, { pageNumber: i + 3 });
+    });
+
+    // 📷 Grupos
+    let primeiroGrupo = true;
+
+    function processar(index) {
+      if (index >= grupos.length) {
+        document.body.style.backgroundColor = corOriginal;
+        console.log("PDF finalizado e pronto para download! 🎉");
+        pdf.save("estoque_por_grupo.pdf");
+        return;
+      }
+
+      const grupo = grupos[index];
+      const bounding = grupo.getBoundingClientRect();
+      window.scrollTo({
+        top: window.scrollY + bounding.top - 100,
+        behavior: "instant"
+      });
+
+      const originalPadding = grupo.style.paddingBottom;
+      grupo.style.paddingBottom = "60px";
+
+      setTimeout(() => {
+        html2canvas(grupo, { scale: 2 }).then(canvas => {
+          const imgData = canvas.toDataURL("image/jpeg", 0.98);
+          const imgWidth = larguraA4;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+          const alturaFinal = imgHeight + alturaRodape + margemTopo;
+          const paginaAltura = alturaFinal < alturaA4 ? alturaA4 : alturaFinal;
+
+          pdf.addPage([imgWidth, paginaAltura]);
+          pdf.addImage(imgData, "JPEG", 0, margemTopo, imgWidth, imgHeight);
+
+          pdf.setFillColor(255, 255, 255);
+          pdf.rect(0, margemTopo + imgHeight - 10, imgWidth, 15, "F");
+
+          const rodapeY = paginaAltura - alturaRodape + 5;
+          pdf.addImage(logo, "PNG", logoX, rodapeY, logoWidth, logoHeight, undefined, "FAST");
+
+          pdf.setFont("helvetica", "italic");
+          pdf.setFontSize(10);
+          pdf.setTextColor(100);
+          pdf.text("Beneficiadora Americana de Tecidos Ltda", imgWidth / 2, rodapeY + logoHeight + 4, { align: "center" });
+
+          const pageNumber = pdf.internal.getCurrentPageInfo().pageNumber;
+          const totalPages = grupos.length + 2;
+          pdf.setFontSize(9);
+          pdf.setTextColor(120);
+          pdf.text(`Página ${pageNumber} de ${totalPages}`, imgWidth - 40, paginaAltura - 5);
+
+          grupo.style.paddingBottom = originalPadding;
+          processar(index + 1);
+        }).catch(error => {
+          console.error("Erro ao capturar grupo:", error);
+          grupo.style.paddingBottom = originalPadding;
+          processar(index + 1);
+        });
+      }, 300);
+    }
+
+    processar(0);
+  };
 }

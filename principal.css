@@ -44,10 +44,15 @@
       padding: 10px;
     }
     .group h2 {
-      text-align: center;
-      color: rgb(71, 82, 88);
-      font-size: 23px;
-    }
+  text-align: center;
+  color: #2C3E50;
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
     .items {
       display: flex;
       flex-wrap: wrap;
@@ -286,3 +291,10 @@ background-image: linear-gradient(315deg, #4dccc6 0%, #96b1e4 74%);
       text-decoration: none;
       color: #007BFF;
     }
+    .hide-on-next-page {
+  display: none;
+}
+.group {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
