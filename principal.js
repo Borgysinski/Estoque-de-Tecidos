@@ -357,7 +357,7 @@ async function salvarGruposComoPDF() {
   avançar();
 
   // FINALIZA
-  pdf.save("estoque_por_grupo.pdf");
+  pdf.save("Catalogo de tecidos BAT.pdf");
   document.body.style.backgroundColor = fundoOriginal;
   overlay.style.display = "none";
   console.log("✅ PDF gerado com índice visual na segunda página e produtos completos!");
