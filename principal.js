@@ -300,23 +300,15 @@ async function salvarGruposComoPDF() {
 
   const pdf = new jsPDF("p", "mm", "a4");
   const grupos = [...document.querySelectorAll(".group")];
-  const rawEntries = [];
+  const paginas = [];
 
   let passoAtual = 0;
-  const totalPassos = grupos.length + 4;
+  const totalPassos = grupos.length + 3;
   function avançar() { atualizarProgresso(Math.round(++passoAtual / totalPassos * 100)); }
 
   // CAPA
   const capa = await capturarViaIframe("src/capa.html");
   if (capa) pdf.addImage(capa, "JPEG", 0, 0, larguraA4, alturaA4);
-  avançar();
-
-  // ÍNDICE VISUAL – SEGUNDA PÁGINA
-  const indiceImg = await capturarViaIframe("src/indice.html");
-  if (indiceImg) {
-    pdf.addPage();
-    pdf.addImage(indiceImg, "JPEG", 0, 0, larguraA4, alturaA4);
-  }
   avançar();
 
   // GRUPOS
@@ -340,7 +332,7 @@ async function salvarGruposComoPDF() {
     pdf.addImage(imgData, "JPEG", 0, topo, imgW, imgH);
 
     const pagina = pdf.internal.getCurrentPageInfo().pageNumber;
-    rawEntries.push({ name: titulo, pagina });
+    paginas.push({ name: titulo, pagina });
 
     pdf.setFont("helvetica", "italic").setFontSize(10).setTextColor(100)
        .text("Beneficiadora Americana de Tecidos Ltda", imgW / 2, pageH - rodape + 12, { align: "center" });
@@ -351,37 +343,16 @@ async function salvarGruposComoPDF() {
     avançar();
   }
 
-  // AGRUPAMENTO e salvamento
-  const agrupado = rawEntries.reduce((acc, { name, pagina }) => {
-    const existente = acc.find(e => e.name === name);
-    if (existente) {
-      if (!existente.paginas.includes(pagina)) existente.paginas.push(pagina);
-    } else {
-      acc.push({ name, paginas: [pagina] });
-    }
-    return acc;
-  }, []);
-  const listaIndice = agrupado.map(({ name, paginas }) => ({
-    name,
-    pagina: paginas.join(", ")
-  }));
-  localStorage.setItem("indicePaginas", JSON.stringify(listaIndice));
+  // SALVA NO LOCALSTORAGE para índice visual
+  localStorage.setItem("indicePaginas", JSON.stringify(paginas));
   avançar();
 
-  // ÍNDICE INTERNO – última parte, após os grupos!
-  pdf.addPage();
-  pdf.setFont("helvetica", "bold").setFontSize(24).setTextColor(0)
-     .text("Índice", larguraA4 / 2, 30, { align: "center" });
-
-  pdf.setFont("helvetica", "normal").setFontSize(14).setTextColor(40);
-  let posY = 50;
-  for (const { name, paginas } of agrupado) {
-    const texto = `${name} — p. ${paginas.join(", ")}`;
-    const linhas = pdf.splitTextToSize(texto, 170);
-    linhas.forEach((linha, i) => {
-      pdf.textWithLink(linha, 20, posY + i * 6, { pageNumber: paginas[0] });
-    });
-    posY += linhas.length * 6 + 4;
+  // ÍNDICE VISUAL – agora com dados corretos
+  const indiceImg = await capturarViaIframe("src/indice.html");
+  if (indiceImg) {
+    pdf.insertPage(2); // insere nova página na posição 2
+    pdf.setPage(2);
+    pdf.addImage(indiceImg, "JPEG", 0, 0, larguraA4, alturaA4);
   }
   avançar();
 
@@ -389,5 +360,5 @@ async function salvarGruposComoPDF() {
   pdf.save("estoque_por_grupo.pdf");
   document.body.style.backgroundColor = fundoOriginal;
   overlay.style.display = "none";
-  console.log("✅ PDF finalizado: com capa, índice visual na página 2, produtos completos e índice interno organizado!");
+  console.log("✅ PDF gerado com índice visual na segunda página e produtos completos!");
 }
