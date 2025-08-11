@@ -1,39 +1,54 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Página Principal - Estoque de Tecidos</title>
-  <link rel="stylesheet" href="principal.css">
+
+  <!-- Estilo principal -->
+  <link rel="stylesheet" href="principal.css" />
+
+  <!-- Bibliotecas necessárias -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-  
   <div class="superior">
     <figure id="logo_BAT">
-      <img src="Midias/logo.png" alt="BAT">
+      <img src="Midias/logo.png" alt="BAT" />
     </figure>
     <h2>Estoque de Tecidos</h2>
   </div>
+
   <div class="container">
     <h1>Tecidos Disponíveis</h1>
-    <div id="inventory"></div>
-    <a href="admin.html">Ir para Admin</a>
+    <div id="inventory">
+      <!-- Conteúdo gerado dinamicamente -->
+    </div>
 
-    <!-- Botão para salvar em PDF -->
-     
-  
+    <a href="admin.html">Ir para Admin</a>
     <button class="btn" onclick="salvarGruposComoPDF()">Salvar PDF</button>
   </div>
 
-  <script src="principal.js">
-   
-firebase.auth().onAuthStateChanged((user) => {
-  if (!user) {
-    window.location.href = "login.html";
-  }
-});
+  <!-- Firebase Auth -->
+  <script>
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
   </script>
+
+  <!-- Script principal -->
+  <script src="principal.js"></script>
+  <div id="loadingOverlay" style="display:none">
+  <div id="loadingBox">
+    <p>Gerando PDF...</p>
+    <div id="progressBarContainer">
+      <div id="progressBar"></div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

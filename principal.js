@@ -247,136 +247,147 @@ function renderInventory() {
 document.addEventListener("DOMContentLoaded", () => {
   renderInventory();
 });
-function salvarGruposComoPDF() {
-  const grupos = document.querySelectorAll(".group");
+async function salvarGruposComoPDF() {
   const { jsPDF } = window.jspdf;
-  const corOriginal = document.body.style.backgroundColor; // ✅ restaurado
-  document.body.style.backgroundColor = "#ffffff";
-
   const larguraA4 = 210;
   const alturaA4 = 297;
-  const alturaRodape = 30;
-  const margemTopo = 15;
+  const topo = 15;
+  const rodape = 30;
+  const fundoOriginal = document.body.style.backgroundColor;
+  document.body.style.backgroundColor = "#ffffff";
 
-  const logo = new Image();
-  logo.src = "Midias/logo.png";
+  const overlay = document.getElementById("loadingOverlay");
+  const progressBar = document.getElementById("progressBar");
+  overlay.style.display = "flex";
+  progressBar.style.width = "0%";
 
-  logo.onload = () => {
-    console.log("Logo carregada, iniciando geração do PDF! ✅");
+  function atualizarProgresso(pct) {
+    progressBar.style.width = `${pct}%`;
+  }
 
-    const pdf = new jsPDF("p", "mm", [larguraA4, alturaA4]);
-    const dataAtual = new Date().toLocaleDateString("pt-BR");
-    const logoWidth = 50;
-    const logoHeight = 18;
-    const logoX = (larguraA4 - logoWidth) / 2;
+  localStorage.removeItem("indicePaginas");
 
-    // 🧢 Capa
-    pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(22);
-    pdf.setTextColor(40);
-    pdf.text("Catálogo de Estoque por Grupo", larguraA4 / 2, 80, { align: "center" });
+  function obterTituloLimpo(grupo, index) {
+    const html = grupo.innerHTML;
+    const codigo = html.match(/Produto:\s*(\d+)/i)?.[1]?.trim() || `Grupo ${index+1}`;
+    const formato = html.match(/Formato:\s*(.*?)(<br>|$)/i)?.[1]?.trim() || "";
+    const tecido = html.match(/-\s*(.*?)\s*(<br>|$)/i)?.[1]?.trim() || "";
+    return [codigo, formato, tecido].filter(Boolean).join(" – ");
+  }
 
-    pdf.setFontSize(14);
-    pdf.setTextColor(80);
-    pdf.text("Beneficiadora Americana de Tecidos Ltda", larguraA4 / 2, 95, { align: "center" });
+  async function capturarViaIframe(pathHTML) {
+    const [html, css] = await Promise.all([
+      fetch(pathHTML).then(r => r.text()),
+      fetch("principal.css").then(r => r.text())
+    ]);
+    const srcdoc = `<html><head><style>${css}</style></head><body>${html}</body></html>`;
+    return new Promise(resolve => {
+      const iframe = document.createElement("iframe");
+      iframe.srcdoc = srcdoc;
+      iframe.style.cssText = "position:absolute;left:-9999px;width:793px;height:1122px";
+      document.body.appendChild(iframe);
+      iframe.onload = async () => {
+        await iframe.contentDocument.fonts?.ready;
+        await new Promise(r => setTimeout(r, 300));
+        const canvas = await html2canvas(iframe.contentDocument.body, {
+          scale: 2, useCORS: true, backgroundColor: "#ffffff"
+        });
+        iframe.remove();
+        resolve(canvas.toDataURL("image/jpeg", 0.98));
+      };
+    });
+  }
 
-    pdf.setFontSize(12);
-    pdf.setTextColor(100);
-    pdf.text(`Atualizado em ${dataAtual}`, larguraA4 / 2, 110, { align: "center" });
+  const pdf = new jsPDF("p", "mm", "a4");
+  const grupos = [...document.querySelectorAll(".group")];
+  const rawEntries = [];
 
-    pdf.addImage(logo, "PNG", logoX, 125, logoWidth, logoHeight, undefined, "FAST");
+  let passoAtual = 0;
+  const totalPassos = grupos.length + 4;
+  function avançar() { atualizarProgresso(Math.round(++passoAtual / totalPassos * 100)); }
 
-    // 📑 Índice
-    pdf.addPage("p", "mm", [larguraA4, alturaA4]);
-    pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(18);
-    pdf.setTextColor(30);
-    pdf.text("Índice", 20, 30);
+  // CAPA
+  const capa = await capturarViaIframe("src/capa.html");
+  if (capa) pdf.addImage(capa, "JPEG", 0, 0, larguraA4, alturaA4);
+  avançar();
 
-    const indexList = [
-      "Tecido Linhão Rotativo 1,50 m – Rotativo",
-      "Toalha Fogão 70 × 70 cm",
-      "Jogos Americanos",
-      "Toalha Redonda 1,40 m",
-      "Toalha Quadrada 1,40 × 1,40 m",
-      "Toalha Retangular 1,40 × 2,10 m",
-      "P.A. Rotativo 1,50 m",
-      "P.A. Fogão 70 × 70 cm",
-      "P.A. Jogos Americanos",
-      "P.A. Redonda 1,40 m",
-      "P.A. Quadrada",
-      "Tecido Premium 2,50 m"
-    ];
+  // ÍNDICE VISUAL – SEGUNDA PÁGINA
+  const indiceImg = await capturarViaIframe("src/indice.html");
+  if (indiceImg) {
+    pdf.addPage();
+    pdf.addImage(indiceImg, "JPEG", 0, 0, larguraA4, alturaA4);
+  }
+  avançar();
 
-    const indiceOffsetY = 40;
-    pdf.setFont("helvetica", "normal");
-    pdf.setFontSize(13);
-    pdf.setTextColor(60);
+  // GRUPOS
+  for (let i = 0; i < grupos.length; i++) {
+    const g = grupos[i];
+    const titulo = obterTituloLimpo(g, i);
+    g.style.paddingBottom = "60px";
+    window.scrollTo({ top: g.offsetTop - 100 });
+    await new Promise(r => setTimeout(r, 300));
 
-    indexList.forEach((titulo, i) => {
-      const y = indiceOffsetY + i * 10;
-      pdf.textWithLink(`• ${titulo}`, 25, y, { pageNumber: i + 3 });
+    const canvas = await html2canvas(g, {
+      scale: 2, useCORS: true, backgroundColor: "#ffffff"
     });
 
-    // 📷 Grupos
-    let primeiroGrupo = true;
+    const imgData = canvas.toDataURL("image/jpeg", 0.98);
+    const imgW = larguraA4;
+    const imgH = (canvas.height * imgW) / canvas.width;
+    const pageH = Math.max(imgH + topo + rodape, alturaA4);
 
-    function processar(index) {
-      if (index >= grupos.length) {
-        document.body.style.backgroundColor = corOriginal;
-        console.log("PDF finalizado e pronto para download! 🎉");
-        pdf.save("estoque_por_grupo.pdf");
-        return;
-      }
+    pdf.addPage([imgW, pageH]);
+    pdf.addImage(imgData, "JPEG", 0, topo, imgW, imgH);
 
-      const grupo = grupos[index];
-      const bounding = grupo.getBoundingClientRect();
-      window.scrollTo({
-        top: window.scrollY + bounding.top - 100,
-        behavior: "instant"
-      });
+    const pagina = pdf.internal.getCurrentPageInfo().pageNumber;
+    rawEntries.push({ name: titulo, pagina });
 
-      const originalPadding = grupo.style.paddingBottom;
-      grupo.style.paddingBottom = "60px";
+    pdf.setFont("helvetica", "italic").setFontSize(10).setTextColor(100)
+       .text("Beneficiadora Americana de Tecidos Ltda", imgW / 2, pageH - rodape + 12, { align: "center" });
+    pdf.setFont("helvetica", "normal").setFontSize(9).setTextColor(120)
+       .text(`Página ${pagina}`, imgW - 20, pageH - 5);
 
-      setTimeout(() => {
-        html2canvas(grupo, { scale: 2 }).then(canvas => {
-          const imgData = canvas.toDataURL("image/jpeg", 0.98);
-          const imgWidth = larguraA4;
-          const imgHeight = (canvas.height * imgWidth) / canvas.width;
-          const alturaFinal = imgHeight + alturaRodape + margemTopo;
-          const paginaAltura = alturaFinal < alturaA4 ? alturaA4 : alturaFinal;
+    g.style.paddingBottom = "";
+    avançar();
+  }
 
-          pdf.addPage([imgWidth, paginaAltura]);
-          pdf.addImage(imgData, "JPEG", 0, margemTopo, imgWidth, imgHeight);
-
-          pdf.setFillColor(255, 255, 255);
-          pdf.rect(0, margemTopo + imgHeight - 10, imgWidth, 15, "F");
-
-          const rodapeY = paginaAltura - alturaRodape + 5;
-          pdf.addImage(logo, "PNG", logoX, rodapeY, logoWidth, logoHeight, undefined, "FAST");
-
-          pdf.setFont("helvetica", "italic");
-          pdf.setFontSize(10);
-          pdf.setTextColor(100);
-          pdf.text("Beneficiadora Americana de Tecidos Ltda", imgWidth / 2, rodapeY + logoHeight + 4, { align: "center" });
-
-          const pageNumber = pdf.internal.getCurrentPageInfo().pageNumber;
-          const totalPages = grupos.length + 2;
-          pdf.setFontSize(9);
-          pdf.setTextColor(120);
-          pdf.text(`Página ${pageNumber} de ${totalPages}`, imgWidth - 40, paginaAltura - 5);
-
-          grupo.style.paddingBottom = originalPadding;
-          processar(index + 1);
-        }).catch(error => {
-          console.error("Erro ao capturar grupo:", error);
-          grupo.style.paddingBottom = originalPadding;
-          processar(index + 1);
-        });
-      }, 300);
+  // AGRUPAMENTO e salvamento
+  const agrupado = rawEntries.reduce((acc, { name, pagina }) => {
+    const existente = acc.find(e => e.name === name);
+    if (existente) {
+      if (!existente.paginas.includes(pagina)) existente.paginas.push(pagina);
+    } else {
+      acc.push({ name, paginas: [pagina] });
     }
+    return acc;
+  }, []);
+  const listaIndice = agrupado.map(({ name, paginas }) => ({
+    name,
+    pagina: paginas.join(", ")
+  }));
+  localStorage.setItem("indicePaginas", JSON.stringify(listaIndice));
+  avançar();
 
-    processar(0);
-  };
+  // ÍNDICE INTERNO – última parte, após os grupos!
+  pdf.addPage();
+  pdf.setFont("helvetica", "bold").setFontSize(24).setTextColor(0)
+     .text("Índice", larguraA4 / 2, 30, { align: "center" });
+
+  pdf.setFont("helvetica", "normal").setFontSize(14).setTextColor(40);
+  let posY = 50;
+  for (const { name, paginas } of agrupado) {
+    const texto = `${name} — p. ${paginas.join(", ")}`;
+    const linhas = pdf.splitTextToSize(texto, 170);
+    linhas.forEach((linha, i) => {
+      pdf.textWithLink(linha, 20, posY + i * 6, { pageNumber: paginas[0] });
+    });
+    posY += linhas.length * 6 + 4;
+  }
+  avançar();
+
+  // FINALIZA
+  pdf.save("estoque_por_grupo.pdf");
+  document.body.style.backgroundColor = fundoOriginal;
+  overlay.style.display = "none";
+  console.log("✅ PDF finalizado: com capa, índice visual na página 2, produtos completos e índice interno organizado!");
 }

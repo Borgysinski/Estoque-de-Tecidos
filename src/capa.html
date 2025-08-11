@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capa do Catálogo</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #003366;
+      font-family: "Arial", sans-serif;
+    }
+
+    #capaPDF {
+      width: 210mm;
+      height: 297mm;
+      padding: 50px;
+      box-sizing: border-box;
+      background:
+        radial-gradient(white 1px, transparent 1px),
+        #003366;
+      background-size: 25px 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 6px double #ffffff;
+      color: #ffffff;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin: 0;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px #000000;
+      font-family: "Impact", sans-serif;
+      letter-spacing: 2px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 10px;
+      font-weight: 400;
+      color: #ffcccc;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .logo {
+      width: 140px;
+      margin-top: 40px;
+      filter: drop-shadow(0 0 5px white);
+    }
+
+    .data {
+      font-size: 14px;
+      margin-top: 20px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div id="capaPDF">
+    <h1>CATÁLOGO</h1>
+    <img src="Midias/logo.png" class="logo" alt="Logo BAT" />
+    <h3>Beneficiadora Americana de Tecidos</h3>
+    <p class="data">Atualizado em <span id="dataAtual"></span></p>
+  </div>
+
+  <script>
+    document.getElementById("dataAtual").textContent =
+      new Date().toLocaleDateString("pt-BR");
+  </script>
+</body>
+</html>
