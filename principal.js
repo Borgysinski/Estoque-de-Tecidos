@@ -293,10 +293,26 @@ async function salvarGruposComoPDF() {
           scale: 2, useCORS: true, backgroundColor: "#ffffff"
         });
         iframe.remove();
-        resolve(canvas.toDataURL("image/jpeg", 0.98));
+        resolve(canvas.toDataURL("image/jpeg", 0.8)); // qualidade reduzida para PDF mais leve
       };
     });
   }
+
+  // 🔹 Carrega o logotipo dinamicamente e calcula proporção
+  const logoBase64 = await fetch("logo.png")
+    .then(r => r.blob())
+    .then(blob => new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(blob);
+    }));
+
+  const logoImage = new Image();
+  logoImage.src = logoBase64;
+  await new Promise(resolve => { logoImage.onload = () => resolve(); });
+
+  const logoWidth = 20; // largura desejada em mm
+  const logoHeight = (logoImage.height / logoImage.width) * logoWidth;
 
   const pdf = new jsPDF("p", "mm", "a4");
   const grupos = [...document.querySelectorAll(".group")];
@@ -304,7 +320,9 @@ async function salvarGruposComoPDF() {
 
   let passoAtual = 0;
   const totalPassos = grupos.length + 3;
-  function avançar() { atualizarProgresso(Math.round(++passoAtual / totalPassos * 100)); }
+  function avançar() {
+    atualizarProgresso(Math.round(++passoAtual / totalPassos * 100));
+  }
 
   // CAPA
   const capa = await capturarViaIframe("src/capa.html");
@@ -323,21 +341,36 @@ async function salvarGruposComoPDF() {
       scale: 2, useCORS: true, backgroundColor: "#ffffff"
     });
 
-    const imgData = canvas.toDataURL("image/jpeg", 0.98);
-    const imgW = larguraA4;
-    const imgH = (canvas.height * imgW) / canvas.width;
-    const pageH = Math.max(imgH + topo + rodape, alturaA4);
+    const imgData = canvas.toDataURL("image/jpeg", 0.8); // qualidade reduzida
+    const imgWidth = larguraA4;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const paginaAltura = Math.max(imgHeight + topo + rodape, alturaA4);
 
-    pdf.addPage([imgW, pageH]);
-    pdf.addImage(imgData, "JPEG", 0, topo, imgW, imgH);
+    pdf.addPage([imgWidth, paginaAltura]);
+    pdf.addImage(imgData, "JPEG", 0, topo, imgWidth, imgHeight);
 
-    const pagina = pdf.internal.getCurrentPageInfo().pageNumber;
-    paginas.push({ name: titulo, pagina });
+    const pageNumber = pdf.internal.getCurrentPageInfo().pageNumber;
+    const totalPages = grupos.length + 2;
+    paginas.push({ name: titulo, pagina: pageNumber });
 
-    pdf.setFont("helvetica", "italic").setFontSize(10).setTextColor(100)
-       .text("Beneficiadora Americana de Tecidos Ltda", imgW / 2, pageH - rodape + 12, { align: "center" });
-    pdf.setFont("helvetica", "normal").setFontSize(9).setTextColor(120)
-       .text(`Página ${pagina}`, imgW - 20, pageH - 5);
+    // Rodapé com logo proporcional, texto e numeração
+    const rodapeY = paginaAltura - rodape + 5;
+    const logoX = (imgWidth - logoWidth) / 2;
+
+    try {
+      pdf.addImage(logoBase64, "PNG", logoX, rodapeY, logoWidth, logoHeight);
+    } catch (e) {
+      console.warn("Erro ao adicionar logotipo:", e);
+    }
+
+    pdf.setFont("helvetica", "italic");
+    pdf.setFontSize(10);
+    pdf.setTextColor(100);
+    pdf.text("Beneficiadora Americana de Tecidos Ltda", imgWidth / 2, rodapeY + logoHeight + 4, { align: "center" });
+
+    pdf.setFontSize(9);
+    pdf.setTextColor(120);
+    pdf.text(`Página ${pageNumber} de ${totalPages}`, imgWidth - 40, paginaAltura - 5);
 
     g.style.paddingBottom = "";
     avançar();
@@ -347,10 +380,10 @@ async function salvarGruposComoPDF() {
   localStorage.setItem("indicePaginas", JSON.stringify(paginas));
   avançar();
 
-  // ÍNDICE VISUAL – agora com dados corretos
+  // ÍNDICE VISUAL
   const indiceImg = await capturarViaIframe("src/indice.html");
   if (indiceImg) {
-    pdf.insertPage(2); // insere nova página na posição 2
+    pdf.insertPage(2);
     pdf.setPage(2);
     pdf.addImage(indiceImg, "JPEG", 0, 0, larguraA4, alturaA4);
   }
@@ -360,5 +393,5 @@ async function salvarGruposComoPDF() {
   pdf.save("Catalogo de tecidos BAT.pdf");
   document.body.style.backgroundColor = fundoOriginal;
   overlay.style.display = "none";
-  console.log("✅ PDF gerado com índice visual na segunda página e produtos completos!");
+  console.log("✅ PDF gerado com logotipo proporcional e tamanho otimizado!");
 }
