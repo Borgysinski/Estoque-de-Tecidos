@@ -214,6 +214,12 @@ background-image: linear-gradient(315deg, #4dccc6 0%, #96b1e4 74%);
       max-width: 300px;
       width: auto;
     }
+  .botoes {
+  display: flex;
+  gap: 42px;
+  margin-top: 20px;
+}
+
     .btn {
   width: 130px;
   height: 40px;
