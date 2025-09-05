@@ -395,3 +395,30 @@ async function salvarGruposComoPDF() {
   overlay.style.display = "none";
   console.log("✅ PDF gerado com logotipo proporcional e tamanho otimizado!");
 }
+
+console.log("principal.js carregado");
+
+// Escuta em tempo real (somente leitura)
+firebase.database().ref('estoque').on('value', snapshot => {
+  console.log("on('value') disparou");
+
+  const dados = snapshot.val();
+  const lista = document.getElementById('listaEstoque');
+  if (!lista) {
+    console.error("Elemento #listaEstoque não encontrado");
+    return;
+  }
+
+  lista.innerHTML = '';
+
+  if (!dados) {
+    lista.innerHTML = '<li>Nenhum item em estoque.</li>';
+    return;
+  }
+
+  Object.entries(dados).forEach(([produtoId, obj]) => {
+    const li = document.createElement('li');
+    li.textContent = `${produtoId}: ${obj.quantidade}`;
+    lista.appendChild(li);
+  });
+});

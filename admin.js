@@ -206,11 +206,28 @@
   return data ? JSON.parse(data) : defaultGroups;
 }
 
-let groups = getGroups();
+// admin.js
+
+let groups = [];
+
+// Carrega dados do localStorage ao iniciar
+function loadGroups() {
+  const stored = localStorage.getItem("groupsData");
+  if (stored) {
+    groups = JSON.parse(stored);
+  } else {
+    groups = []; // inicia vazio se não existir
+  }
+}
 
 function renderAdminInventory() {
   const adminInventoryDiv = document.getElementById("adminInventory");
   adminInventoryDiv.innerHTML = "";
+
+  if (groups.length === 0) {
+    adminInventoryDiv.innerHTML = "<p>Nenhum item cadastrado no estoque.</p>";
+    return;
+  }
 
   groups.forEach((group, gIndex) => {
     const groupDiv = document.createElement("div");
@@ -246,8 +263,10 @@ function renderAdminInventory() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  loadGroups();
   renderAdminInventory();
 
+  // Atualiza em memória ao alterar um input
   document.getElementById("adminInventory").addEventListener("input", function (e) {
     if (e.target && e.target.matches("input[type='number']")) {
       const groupIndex = e.target.getAttribute("data-group");
@@ -257,6 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Salvar alterações no localStorage
   document.getElementById("saveBtn").addEventListener("click", function () {
     localStorage.setItem("groupsData", JSON.stringify(groups));
     alert("Estoque atualizado com sucesso!");

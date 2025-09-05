@@ -9,9 +9,10 @@
   <!-- Firebase SDKs compatíveis -->
   <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore-compat.js"></script>
 
-  <!-- Inicializa Firebase -->
   <script>
+    // Configuração do Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyBkKWhnVnBD_y3tVMwwB_E2KqtAjAd-SGw",
       authDomain: "estoque-de-tecidos-bat-cc79e.firebaseapp.com",
@@ -22,13 +23,12 @@
       measurementId: "G-WVHYPE5JHR"
     };
     firebase.initializeApp(firebaseConfig);
-  </script>
+    const db = firebase.firestore();
 
-  <!-- Verificação de autenticação -->
-  <script>
+    // Proteção de rota: só acessa se estiver logado
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
-        window.location.href = "login.html"; // redireciona se não estiver logado
+        window.location.href = "login.html";
       }
     });
   </script>

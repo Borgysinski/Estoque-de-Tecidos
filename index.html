@@ -26,19 +26,12 @@
       <!-- Conteúdo gerado dinamicamente -->
     </div>
      <div class="botoes">
-    <button class="btn" onclick="window.location.href='admin.html'">Ir para Admin</button>
+    <button class="btn" onclick="window.location.href='login.html'">Ir para Admin</button>
     <button class="btn" onclick="salvarGruposComoPDF()">Salvar PDF</button>
     </div>
   </div>
 
-  <!-- Firebase Auth -->
-  <script>
-    firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        window.location.href = "login.html";
-      }
-    });
-  </script>
+  
 
   <!-- Script principal -->
   <script src="principal.js"></script>
